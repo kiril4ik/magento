@@ -1,4 +1,24 @@
-<?php //echo $block->getProductName();?><!-- <br>-->
-<?php //echo $block->getHelloWorld();?>
-<h4>Current date</h4>
-<?php //echo $block->getCurrentTime();?><!-- <br>-->
+<?php echo $block->getProductName();?> <br>
+<?php echo $block->getHelloWorld();?>
+<?php echo $block->getCurrentTime();?>
+Price with 20% discount: <?php echo intval($block->getProductPrice())*0.8;?>$ <br>
+<?php echo $block->getBlaBla();?>
+
+<ul>
+    <li><strong>Categories list</strong></li>
+<?php
+foreach ($block->getMenuList() as $el) {
+    echo '<li>'. $el .'</li>';
+}
+?>
+</ul>
+
+
+<ul>
+    <li><strong>Products list</strong></li>
+    <?php
+    foreach ($block->getProdList() as $el) {
+        echo '<li>'. $el .'</li>';
+    }
+    ?>
+</ul>

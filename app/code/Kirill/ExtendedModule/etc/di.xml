@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Kirill\ExtendedModule\Block\TextBlock" type="Kirill\ExtendedModule\Preference\TextBlockPreference" />
+
+    <type name="Kirill\ExtendedModule\Block\TextBlock">
+        <plugin disabled="false" name="kirill_extendedmodule_textblockplugin"  sortOrder="5" type="Kirill\ExtendedModule\Plugin\TextBlockPlugin"/>
+    </type>
+</config>
