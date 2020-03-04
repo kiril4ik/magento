@@ -22,3 +22,12 @@ foreach ($block->getMenuList() as $el) {
     }
     ?>
 </ul>
+
+<ul>
+    <li><strong>Products list from options category </strong></li>
+    <?php
+    foreach ($block->getOptionsCatProducts() as $el) {
+        echo '<li>'. $el .'</li>';
+    }
+    ?>
+</ul>

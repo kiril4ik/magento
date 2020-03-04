@@ -12,6 +12,8 @@ use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Catalog\Model\CategoryRepository;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 
+use Kirill\ExtendedModule\Helper\Config\Category as Category_helper;
+
 class TextBlock extends Template
 {
     /**
@@ -44,6 +46,10 @@ class TextBlock extends Template
      */
     private $product_collection;
     /**
+     * @var Category_helper
+     */
+    private $cat_helper;
+    /**
      * TextBlock constructor.
      * @param Template\Context $context
      * @param Registry $registry
@@ -54,6 +60,7 @@ class TextBlock extends Template
                                 CollectionFactory $collection_factory,
                                 CategoryRepository $category_repository,
                                 ProductCollectionFactory $product_collection,
+                                Category_helper $cat_helper,
                                 array $data)
     {
         parent::__construct($context, $data);
@@ -63,6 +70,7 @@ class TextBlock extends Template
         $this->collection_factory = $collection_factory;
         $this->category_repository = $category_repository;
         $this->product_collection = $product_collection;
+        $this->cat_helper = $cat_helper;
     }
 
     public function getHelloWorld()
@@ -123,9 +131,9 @@ class TextBlock extends Template
         }
         return $collection_arr;
     }
-    public function getProdList() {
+    public function getProdList($cat_id = '41') {
         $prod_array = [];
-        $cat_obj = $this->category_repository->get('41');
+        $cat_obj = $this->category_repository->get($cat_id);
         $products = $this->product_collection->
             create()->
             addCategoryFilter($cat_obj)->
@@ -134,5 +142,14 @@ class TextBlock extends Template
             $prod_array[] = $prod->getData('name');
         }
         return $prod_array;
+    }
+
+    public function getConfigCat()
+    {
+        return $this->cat_helper->getCategory();
+    }
+    public function getOptionsCatProducts()
+    {
+        return $this->getProdList($this->getConfigCat());
     }
 }
